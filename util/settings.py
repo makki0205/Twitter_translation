@@ -17,6 +17,7 @@ class Settings(object):
     """環境依存の設定を保持するクラス"""
 
     _twtter = "twtter"
+    _translation = "translation"
 
     def __init__(self):
         self.config_parser = _load_conf_file(_conf_path)
@@ -28,5 +29,10 @@ class Settings(object):
             'ACCESS_TOKEN':self.config_parser.get(Settings._twtter, "ACCESS_TOKEN"),
             'ACCESS_SECRET':self.config_parser.get(Settings._twtter, "ACCESS_SECRET"),
         }
-        
+    def get_translation_conf(self):
+        return {
+        'CLIENT_ID':self.config_parser.get(Settings._translation, "CLIENT_ID"),
+        'CLIENT_SECRET':self.config_parser.get(Settings._translation, "CLIENT_SECRET")
+        }
+
 settings = Settings()

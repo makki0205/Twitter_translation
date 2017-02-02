@@ -5,6 +5,7 @@ from requests_oauthlib import OAuth1Session
 
 
 class Twtter(object):
+
     def __init__(self):
         keys = settings.get_twtter_conf()
         self.tw = OAuth1Session(keys['CONSUMER_KEY'], keys['CONSUMER_SECRET'], keys['ACCESS_TOKEN'], keys['ACCESS_SECRET'])
