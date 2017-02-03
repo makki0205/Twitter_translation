@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
 from api.twitter import twitter as tw
 from api.translator import translation as tr
+from service.tweetStream import TweetStream
+import json
 
-# print (tw.tweet("test03"))
-# # print (tw.get_tweet())
-#
-# for tweet in tw.get_tweet():
-#   print (tweet["text"])
-#   print ('-------------------')
+# print ( tr.ja_to_tw('こんにちは　https://t.co/h9JmioNM51'))
+
+def tweet (msg):
+    tw_text = tr.ja_to_tw(msg['text'])
+    print(msg['text'] + " => " + tw_text)
+    tw.tweet(tw_text)
+
+def delete(msg):
+    print('delete')
+    print(msg)
 
 
-print(tr.ja_to_tw('お腹が空いたのでご飯を食べようと考えています!'))
+ts = TweetStream('makki0205')
+
+ts.on_tweet(tweet)
+ts.on_delete(delete)
+
+
+ts.run()

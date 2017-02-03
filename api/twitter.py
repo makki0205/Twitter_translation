@@ -20,12 +20,36 @@ class Twtter(object):
         # レスポンスコードを返す
         return res.text
 
-    def get_tweet(self):
+    def get_tweet(self,user_id):
         URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
 
-        payload = {'user_id': '1659468336'}
+        payload = {'user_id': user_id}
         res = self.tw.get(URL, params = payload)
 
         return json.loads(res.text)
 
+    def stream(self, screen_name, callback):
+        URL = 'https://stream.twitter.com/1.1/statuses/filter.json'
+
+        payload = {'follow': self.get_user_id(screen_name)}
+        res = self.tw.post(URL, params = payload, stream=True)
+
+        for line in res.iter_lines():
+            msg = ""
+            try:
+                msg = json.loads(line.decode('utf-8'))
+            except Exception as e:
+                msg = False
+                pass
+            if msg :
+                callback(msg)
+
+
+    def get_user_id(self,screen_name):
+        URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
+
+        payload = {'screen_name': screen_name , 'count':1}
+        res = self.tw.get(URL, params = payload)
+
+        return json.loads(res.text)[0]['user']['id_str']
 twitter = Twtter()
