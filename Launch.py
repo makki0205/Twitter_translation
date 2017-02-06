@@ -22,7 +22,6 @@ def delete(msg):
 logger.info("start")
 
 hoge ="aabbccddd"
-print(hoge.find('@'))
 
 ts = TweetStream('makki0205')
 
