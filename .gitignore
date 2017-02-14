@@ -1,0 +1,4 @@
+settings.conf
+.python-version
+__pycache__
+*.log
