@@ -15,7 +15,7 @@ logging_config = dict(
                         'formatter': 'simpleFormatter',
                         'level': logging.getLevelName(logging.DEBUG),
                         'filename': 'server_info.log',
-                        'maxBytes': 1024*200,
+                        'maxBytes': 1024 * 200,
                         'backupCount': 3,
                         'encoding': 'utf-8'}
     },

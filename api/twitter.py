@@ -8,23 +8,24 @@ class Twtter(object):
 
     def __init__(self):
         keys = settings.get_twtter_conf()
-        self.tw = OAuth1Session(keys['CONSUMER_KEY'], keys['CONSUMER_SECRET'], keys['ACCESS_TOKEN'], keys['ACCESS_SECRET'])
+        self.tw = OAuth1Session(keys['CONSUMER_KEY'], keys['CONSUMER_SECRET'], keys[
+                                'ACCESS_TOKEN'], keys['ACCESS_SECRET'])
 
-    def tweet(self,text):
+    def tweet(self, text):
         URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
         # Tweetを作成
         payload = {'status': text}
-        res = self.tw.post(URL, params = payload)
+        res = self.tw.post(URL, params=payload)
 
         # レスポンスコードを返す
         return res.text
 
-    def get_tweet(self,user_id):
+    def get_tweet(self, user_id):
         URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
 
         payload = {'user_id': user_id}
-        res = self.tw.get(URL, params = payload)
+        res = self.tw.get(URL, params=payload)
 
         return json.loads(res.text)
 
@@ -32,7 +33,7 @@ class Twtter(object):
         URL = 'https://stream.twitter.com/1.1/statuses/filter.json'
 
         payload = {'follow': self.get_user_id(screen_name)}
-        res = self.tw.post(URL, params = payload, stream=True)
+        res = self.tw.post(URL, params=payload, stream=True)
 
         for line in res.iter_lines():
             msg = ""
@@ -41,15 +42,14 @@ class Twtter(object):
             except Exception as e:
                 msg = False
                 pass
-            if msg :
+            if msg:
                 callback(msg)
 
-
-    def get_user_id(self,screen_name):
+    def get_user_id(self, screen_name):
         URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
 
-        payload = {'screen_name': screen_name , 'count':1}
-        res = self.tw.get(URL, params = payload)
+        payload = {'screen_name': screen_name, 'count': 1}
+        res = self.tw.get(URL, params=payload)
 
         return json.loads(res.text)[0]['user']['id_str']
 twitter = Twtter()

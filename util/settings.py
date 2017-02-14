@@ -24,15 +24,16 @@ class Settings(object):
 
     def get_twtter_conf(self):
         return {
-            'CONSUMER_KEY':self.config_parser.get(Settings._twtter, "CONSUMER_KEY"),
-            'CONSUMER_SECRET':self.config_parser.get(Settings._twtter, "CONSUMER_SECRET"),
-            'ACCESS_TOKEN':self.config_parser.get(Settings._twtter, "ACCESS_TOKEN"),
-            'ACCESS_SECRET':self.config_parser.get(Settings._twtter, "ACCESS_SECRET"),
+            'CONSUMER_KEY': self.config_parser.get(Settings._twtter, "CONSUMER_KEY"),
+            'CONSUMER_SECRET': self.config_parser.get(Settings._twtter, "CONSUMER_SECRET"),
+            'ACCESS_TOKEN': self.config_parser.get(Settings._twtter, "ACCESS_TOKEN"),
+            'ACCESS_SECRET': self.config_parser.get(Settings._twtter, "ACCESS_SECRET"),
         }
+
     def get_translation_conf(self):
         return {
-        'CLIENT_ID':self.config_parser.get(Settings._translation, "CLIENT_ID"),
-        'CLIENT_SECRET':self.config_parser.get(Settings._translation, "CLIENT_SECRET")
+            'CLIENT_ID': self.config_parser.get(Settings._translation, "CLIENT_ID"),
+            'CLIENT_SECRET': self.config_parser.get(Settings._translation, "CLIENT_SECRET")
         }
 
 settings = Settings()
